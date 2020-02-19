@@ -1,0 +1,5 @@
+{
+  "ASSISTANT_APIKEY": "LqU1X2S3KBdtgWcx8ULkK8stDT0tLRTKOpbDYvdFIamr",
+  "ASSISTANT_URL": "https://api.us-south.assistant.watson.cloud.ibm.com/instances/c7041352-fd61-493a-b9d0-eb2530dd4445/v1/workspaces/4a09437e-c562-4b20-9591-2bde60bfeec7/message",
+  "SKILL_ID": "4a09437e-c562-4b20-9591-2bde60bfeec7"
+}
