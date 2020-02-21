@@ -59,14 +59,17 @@ function initClients(args) {
     serviceUrl: args.ASSISTANT_URL
   });
 
-  console.log('Connected to Watson Assistant');
+  //console.log('Connected to Watson Assistant');
 }
 
 function assistantMessage(request, skillId) {
   return new Promise(function(resolve, reject) {
-    const input = request.intent ? request.intent.slots.EveryThingSlot.value : 'start skill';
-    console.log('SKILL_ID: ' + skillId);
-    console.log('Input text: ' + input);
+    var input = request.intent;
+    if (!(input == undefined)) {
+      input = "#" + request.intent["name"];
+    }
+    //console.log('SKILL_ID: ' + skillId);
+    //console.log('Input text: ' + input);  
 
     assistant.message(
       {
@@ -76,10 +79,10 @@ function assistantMessage(request, skillId) {
       },
       function(err, watsonResponse) {
         if (err) {
-          console.error(err);
+          //console.error(err);
           reject(Error('Error talking to Watson.'));
         } else {
-          console.log('Watson result: ', watsonResponse.result);
+          //console.log('Watson result: ', watsonResponse.result);
           context = watsonResponse.result.context; // Update global context
           resolve(watsonResponse);
         }
@@ -89,12 +92,12 @@ function assistantMessage(request, skillId) {
 }
 
 function sendResponse(response, resolve) {
-  console.log('Begin sendResponse');
-  console.log(response);
+  //console.log('Begin sendResponse');
+  //console.log(response);
 
   // Combine the output messages into one message.
+
   const output = response.result.output.text.join(' ');
-  console.log('Output text: ' + output);
 
   // Resolve the main promise now that we have our response
   resolve({
@@ -110,10 +113,11 @@ function sendResponse(response, resolve) {
   });
 }
 
-function main(args) {
-  console.log('Begin action');
-  // console.log(args);
-  return new Promise(function(resolve, reject) {
+
+async function main(args) {
+
+  /* Getting Call from Alexa */
+  return await new Promise(function(resolve, reject) {
     if (!args.__ow_body) {
       return reject(errorResponse('Must be called from Alexa.'));
     }
@@ -123,25 +127,23 @@ function main(args) {
 
     // Alexa attributes hold our context
     const alexaAttributes = body.session.attributes;
-    console.log('Alexa attributes:');
-    console.log(alexaAttributes);
     if (typeof alexaAttributes !== 'undefined' && Object.prototype.hasOwnProperty.call(alexaAttributes, 'watsonContext')) {
       context = alexaAttributes.watsonContext;
     } else {
       context = {};
     }
 
-    const request = body.request;
+    var request = body.request;
 
-    verifyFromAlexa(args, rawBody)
+      verifyFromAlexa(args, rawBody)
       .then(() => initClients(args))
       .then(() => assistantMessage(request, args.SKILL_ID))
       .then(watsonResponse => sendResponse(watsonResponse, resolve))
       .catch(err => {
-        console.error('Caught error: ');
-        console.log(err);
         reject(errorResponse(err));
-      });
+      }
+    );
+
   });
 }
 

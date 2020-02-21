@@ -1,5 +1,5 @@
 {
-  "ASSISTANT_APIKEY": "LqU1X2S3KBdtgWcx8ULkK8stDT0tLRTKOpbDYvdFIamr",
-  "ASSISTANT_URL": "https://api.us-south.assistant.watson.cloud.ibm.com/instances/c7041352-fd61-493a-b9d0-eb2530dd4445/v1/workspaces/4a09437e-c562-4b20-9591-2bde60bfeec7/message",
-  "SKILL_ID": "4a09437e-c562-4b20-9591-2bde60bfeec7"
+  "ASSISTANT_APIKEY": "Uy6V3UI3prKAAZbY4waNLz3DYhsp8mgH0hoE1fdTYH0M",
+  "ASSISTANT_URL": "https://api.us-south.assistant.watson.cloud.ibm.com/instances/e4e04592-db6b-4c46-ba30-3efa415aa071",
+  "SKILL_ID": "96098a57-3fc2-4fc6-b56e-06e02243af9a"
 }
